@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'CustomIcons.dart';
-import 'Widgets/SocialIcons.dart';
+import 'package:log_in_screen/CustomIcons.dart';
+import 'package:log_in_screen/Widgets/SocialIcons.dart';
 
 bool _signUpActive = false;
 bool _signInActive = true;
 TextEditingController _usernameController = TextEditingController();
 TextEditingController _passwordController = TextEditingController();
 
-void main() =>
-    runApp(MaterialApp(
+void main() => runApp(MaterialApp(
       home: MyApp(),
       debugShowCheckedModeBanner: false,
     ));
@@ -21,8 +19,7 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => new _MyAppState();
 }
 
-Widget horizontalLine() =>
-    Padding(
+Widget horizontalLine() => Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.0),
       child: Container(
         width: ScreenUtil.getInstance().setWidth(120),
@@ -34,11 +31,10 @@ Widget horizontalLine() =>
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil.getInstance()
-      ..init(context);
+    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
-    ScreenUtil(width: 750, height: 1334, allowFontScaling: true)
-      ..init(context);
+        ScreenUtil(width: 750, height: 1334, allowFontScaling: true)
+          ..init(context);
     return new Scaffold(
       resizeToAvoidBottomPadding: true,
       body: Container(
@@ -47,9 +43,9 @@ class _MyAppState extends State<MyApp> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color.fromRGBO(247, 140, 123, 1),
-                  Color.fromRGBO(197, 112, 98, 1)
-                ])),
+              Color.fromRGBO(247, 140, 123, 1),
+              Color.fromRGBO(197, 112, 98, 1)
+            ])),
         child: Padding(
           padding: EdgeInsets.only(top: 40.0),
           //Sets the main padding all widgets has to adhere to.
@@ -103,13 +99,13 @@ class _MyAppState extends State<MyApp> {
                           child: new Text('SIGN IN',
                               style: _signInActive
                                   ? TextStyle(
-                                  fontSize: 22,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)
+                                      fontSize: 22,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)
                                   : TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.normal)),
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.normal)),
                         ),
                         OutlineButton(
                           onPressed: () => setState(() => changeToSignUp()),
@@ -121,13 +117,13 @@ class _MyAppState extends State<MyApp> {
                           child: Text('SIGN UP',
                               style: _signUpActive
                                   ? TextStyle(
-                                  fontSize: 22,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold)
+                                      fontSize: 22,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold)
                                   : TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.normal)),
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.normal)),
                         )
                       ],
                     ),
@@ -240,9 +236,7 @@ Widget showSignIn() {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               horizontalLine(),
-              Text('Social Login',
-                  style: TextStyle(color: Colors.white)
-              ),
+              Text('Social Login', style: TextStyle(color: Colors.white)),
               horizontalLine()
             ],
           ),
@@ -291,8 +285,8 @@ Widget showSignUp() {
   );
 }
 
-void tryToSignIn(TextEditingController _username,
-    TextEditingController _password) {}
+void tryToSignIn(
+    TextEditingController _username, TextEditingController _password) {}
 
 void tryToSignUp() {}
 
