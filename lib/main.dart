@@ -8,6 +8,8 @@ bool _signUpActive = false;
 bool _signInActive = true;
 TextEditingController _usernameController = TextEditingController();
 TextEditingController _passwordController = TextEditingController();
+TextEditingController _newUsernameController = TextEditingController();
+TextEditingController _newPasswordController = TextEditingController();
 
 void main() =>
     runApp(MaterialApp(
@@ -21,8 +23,7 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => new _MyAppState();
 }
 
-Widget horizontalLine() =>
-    Padding(
+Widget horizontalLine() => Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.0),
       child: Container(
         width: ScreenUtil.getInstance().setWidth(120),
@@ -37,7 +38,7 @@ class _MyAppState extends State<MyApp> {
     ScreenUtil.instance = ScreenUtil.getInstance()
       ..init(context);
     ScreenUtil.instance =
-    ScreenUtil(width: 750, height: 1334, allowFontScaling: true)
+    ScreenUtil(width: 750, height: 1304, allowFontScaling: true)
       ..init(context);
     return new Scaffold(
       resizeToAvoidBottomPadding: true,
@@ -59,6 +60,7 @@ class _MyAppState extends State<MyApp> {
                 child: Padding(
                     padding: EdgeInsets.only(top: 20.0),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
                           "MOMENTUM",
@@ -80,7 +82,7 @@ class _MyAppState extends State<MyApp> {
                       ],
                     )),
                 width: ScreenUtil.getInstance().setWidth(750),
-                height: ScreenUtil.getInstance().setHeight(200),
+                height: ScreenUtil.getInstance().setHeight(190),
               ),
               SizedBox(
                 height: ScreenUtil.getInstance().setHeight(60),
@@ -134,17 +136,17 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
                 width: ScreenUtil.getInstance().setWidth(750),
-                height: ScreenUtil.getInstance().setHeight(200),
+                height: ScreenUtil.getInstance().setHeight(170),
               ),
               SizedBox(
-                height: ScreenUtil.getInstance().setHeight(40),
+                height: ScreenUtil.getInstance().setHeight(10),
               ),
               Container(
                 child: Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: _signInActive ? showSignIn() : showSignUp()),
                 width: ScreenUtil.getInstance().setWidth(750),
-                height: ScreenUtil.getInstance().setHeight(754),
+                height: ScreenUtil.getInstance().setHeight(778),
               ),
             ],
           ),
@@ -159,7 +161,7 @@ Widget showSignIn() {
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: <Widget>[
       SizedBox(
-        height: ScreenUtil.getInstance().setHeight(50),
+        height: ScreenUtil.getInstance().setHeight(30),
       ),
       Container(
         child: Padding(
@@ -209,7 +211,7 @@ Widget showSignIn() {
         ),
       ),
       SizedBox(
-        height: ScreenUtil.getInstance().setHeight(60),
+        height: ScreenUtil.getInstance().setHeight(80),
       ),
       Container(
         child: Padding(
@@ -231,7 +233,7 @@ Widget showSignIn() {
         ),
       ),
       SizedBox(
-        height: ScreenUtil.getInstance().setHeight(60),
+        height: ScreenUtil.getInstance().setHeight(50),
       ),
       Container(
         child: Padding(
@@ -263,6 +265,9 @@ Widget showSignIn() {
             iconData: CustomIcons.facebook,
             onPressed: () {},
           ),
+          SizedBox(
+            width: 30,
+          ),
           SocialIcon(
             colors: [
               Color(0xFF1DA1F2),
@@ -270,6 +275,9 @@ Widget showSignIn() {
             ],
             iconData: CustomIcons.twitter,
             onPressed: () {},
+          ),
+          SizedBox(
+            width: 30,
           ),
           SocialIcon(
             colors: [
@@ -287,14 +295,89 @@ Widget showSignIn() {
 
 Widget showSignUp() {
   return Column(
-    children: <Widget>[Text('Love')],
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: <Widget>[
+      SizedBox(
+        height: ScreenUtil.getInstance().setHeight(30),
+      ),
+      Container(
+        child: Padding(
+          padding: EdgeInsets.only(),
+          child: TextField(
+            style: TextStyle(color: Colors.white),
+            controller: _newUsernameController,
+            decoration: InputDecoration(
+              hintText: 'Enter your Name',
+              hintStyle: TextStyle(fontSize: 18.0, color: Colors.white),
+              enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white, width: 1.0)),
+              focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white, width: 1.0)),
+              prefixIcon: const Icon(
+                Icons.person,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
+      SizedBox(
+        height: ScreenUtil.getInstance().setHeight(50),
+      ),
+      Container(
+        child: Padding(
+          padding: EdgeInsets.only(),
+          child: TextField(
+            obscureText: true,
+            style: TextStyle(color: Colors.white),
+            controller: _newPasswordController,
+            decoration: InputDecoration(
+              //Add th Hint text here.
+              hintText: 'Enter a Password',
+              hintStyle: TextStyle(fontSize: 18.0, color: Colors.white),
+              enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white, width: 1.0)),
+              focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white, width: 1.0)),
+              prefixIcon: const Icon(
+                Icons.lock,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
+      SizedBox(
+        height: ScreenUtil.getInstance().setHeight(80),
+      ),
+      Container(
+        child: Padding(
+          padding: EdgeInsets.only(),
+          child: RaisedButton(
+            child: Text(
+              'SIGN UP',
+              style: TextStyle(
+                color: Color.fromRGBO(247, 140, 123, 1),
+                fontSize: 24.0,
+              ),
+            ),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)),
+            color: Colors.white,
+            onPressed: () =>
+                tryToSignUp(_newUsernameController, _newPasswordController),
+          ),
+        ),
+      ),
+    ],
   );
 }
 
-void tryToSignIn(TextEditingController _username,
-    TextEditingController _password) {}
+void tryToSignIn(TextEditingController _username, TextEditingController _password) {
 
-void tryToSignUp() {}
+    }
+
+void tryToSignUp(TextEditingController _newUsername, TextEditingController _newPassword) {}
 
 void changeToSignUp() {
   _signUpActive = true;
