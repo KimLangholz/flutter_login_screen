@@ -7,7 +7,6 @@ import 'dart:convert';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
 import 'package:log_in_screen/Objects/user.dart';
-import 'package:log_in_screen/Screens/Test.dart';
 
 
 bool _signUpActive = false;
@@ -174,13 +173,6 @@ class _MyAppState extends State<MyApp> {
       this.profileData = profileData;
     });
   }
-
-  void _navigateToNextScreen(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Test()),
-    );
-
   void initiateFacebookLogin() async {
     var facebookLoginResult =
         await facebookLogin.logInWithReadPermissions(['email']);
@@ -198,23 +190,13 @@ class _MyAppState extends State<MyApp> {
                 .accessToken.token}');
 
         var profile = json.decode(graphResponse.body);
-
         print(profile.toString());
         
         onLoginStatusChanged(true, profileData: profile);
 
-        new User.facebook(profileData['email'], profileData['name'], profileData['id'], profileData);
-        _navigateToNextScreen(context);
-        //print("TEST: ${profile['email']} "+" | "+" ${profileData['name']} "+" | "+"${profileData['id']}");
-        //print("User object data: "+user.email + user.name + user.fbID);
         break;
     }
-
-    
-  }
 }
-
-
 
 Widget showSignIn() {
   return Column(

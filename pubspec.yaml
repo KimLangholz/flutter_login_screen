@@ -19,11 +19,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   flutter_screenutil: ^0.5.3
+  sqflite: any
+  path_provider: any
+  intl: ^0.15.7
+  flutter_facebook_login: 
+    git: https://github.com/lequanghiep74/flutter_facebook_login
+  http: ^0.12.0 
+
 
 dev_dependencies:
   flutter_test:
