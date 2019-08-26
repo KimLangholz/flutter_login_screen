@@ -1,49 +1,44 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-import 'package:log_in_screen/Objects/user.dart';
-import 'package:http/http.dart' as http;
-import 'package:log_in_screen/Objects/user.dart' as prefix0;
+import 'package:momentum/Objects/user.dart';
 
-void Test() {
-  runApp(LoginPage());
-}
+class Profile extends StatelessWidget {
+  final User user = User();
 
-class LoginPage extends StatefulWidget {
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  final User user;
-  var userProfile = new User();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Facebook Login"),
+          title: Text("Data from logged in user:"),
           actions: <Widget>[
             IconButton(
               icon: Icon(
                 Icons.exit_to_app,
                 color: Colors.white,
               ),
-              onPressed: () {},
+              onPressed: () => Navigator.pop(context),
             ),
           ],
         ),
         body: Container(
           child: Center(
-            child: _displayUserData(userProfile.profileData)
-          ),
+              child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text("Name: " + user.name.toString()),
+                  Text("Email: " + user.email.toString()),
+                  Text("Facebook ID: " + user.fbID.toString()),
+                  Text("Picture url: "+ user.url.toString())
+                ],
+              )
+              //child: _displayUserData(user.profileData),
+            ),
         ),
       ),
     );
   }
 
-  _displayUserData(profileData) {
+  /** _displayUserData(profileData) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -54,9 +49,10 @@ class _LoginPageState extends State<LoginPage> {
             shape: BoxShape.circle,
             image: DecorationImage(
               fit: BoxFit.fill,
-              image: NetworkImage(
+               image: NetworkImage(
                 profileData['picture']['data']['url'],
               ),
+              
             ),
           ),
         ),
@@ -69,18 +65,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ],
     );
-  }
+}*/
 
-  _displayLoginButton() {
-    return RaisedButton(
-      child: Text("Login with Facebook"),
-      onPressed: () => initiateFacebookLogin(),
-    );
-  }
-
-  _logout() async {
-    await facebookLogin.logOut();
-    onLoginStatusChanged(false);
-    print("Logged out");
-  }
 }

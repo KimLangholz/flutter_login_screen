@@ -1,16 +1,24 @@
 class User{
 
+  static final User _instance = User._internal();
+  factory User() => _instance;
+  
+  User._internal() {
+    // init things inside this
+  }
+  
+  // Methods, variables ...
+
   String _name;
   String _email;
   String _password;
   String _saltKey;
   String _fbID;
+  String _url;
   var _profileData;
-
-  User();
   //User(this._email, this._password, this._saltKey, [this._name]);
 
-  User.facebook(this._email, this._name, this._fbID, [this._profileData]);
+  //User.facebook(this._email, this._name, this._fbID, [this._profileData]);
 
   String get name => _name;
 
@@ -24,8 +32,10 @@ class User{
 
   String get profileData => _profileData;
 
+  String get url => _url;
+
   set name(String newName){
-    this._name = newName;
+    _name = newName;
   } 
 
   set email(String newEmail){
@@ -46,6 +56,10 @@ class User{
 
   set profileData(var profileData){
     this._profileData = profileData;
+  }
+
+  set url(String url){
+    this._url = url;
   }
 
   // CONVERT NOTE OBJECT INTO A MAP OBJECT

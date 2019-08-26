@@ -1,4 +1,4 @@
-package kimlangholz.log_in_screen
+package kimlangholz.momentum
 
 import android.os.Bundle
 
