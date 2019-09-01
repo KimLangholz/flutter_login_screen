@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>318159412197-7n5b5r6h4d3ljvqrpq9t0i4d7a5q42ft.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.318159412197-7n5b5r6h4d3ljvqrpq9t0i4d7a5q42ft</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAN1k0M5q3jU439-IPBiBDeK0Qe6Wh_srI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>318159412197</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>kimlangholz.logInScreen</string>
+	<key>PROJECT_ID</key>
+	<string>momentum-4c39e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>momentum-4c39e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:318159412197:ios:f1d92cf17f922fd7</string>
+	<key>DATABASE_URL</key>
+	<string>https://momentum-4c39e.firebaseio.com</string>
+</dict>
+</plist>

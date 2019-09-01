@@ -7,6 +7,7 @@ import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
 import 'package:momentum/Objects/user.dart';
 import 'package:momentum/Screens/Profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 bool _signUpActive = false;
 bool _signInActive = true;
@@ -444,32 +445,43 @@ class _MyAppState extends State<MyApp> {
         break;
     }
   }
+
+  void validateWithFirebase(String email, String password) async {
+    try {
+      AuthResult result = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      print('Signed in: ${result.user.uid}');
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  void tryToSignIn(
+      TextEditingController _email, TextEditingController _password) {
+    validateWithFirebase(_email.text, _password.text);
+  }
+
+  void tryToSignUp(TextEditingController _name, TextEditingController _password,
+      TextEditingController _email) {
+    var enteredName = _name;
+    var enteredmail = _email;
+    var enteredPassword = _password;
+  }
+
+  void changeToSignUp() {
+    _signUpActive = true;
+    _signInActive = false;
+  }
+
+  void changeToSignIn() {
+    _signUpActive = false;
+    _signInActive = true;
+  }
+
+  Future navigateToProfile(context) async {
+    await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Profile()));
+  }
 }
 
-void tryToSignIn(
-    TextEditingController _email, TextEditingController _password) {
-  var email = _email;
-  var password = _password;
-}
 
-void tryToSignUp(TextEditingController _name, TextEditingController _password,
-    TextEditingController _email) {
-  var enteredName = _name;
-  var enteredmail = _email;
-  var enteredPassword = _password;
-}
-
-void changeToSignUp() {
-  _signUpActive = true;
-  _signInActive = false;
-}
-
-void changeToSignIn() {
-  _signUpActive = false;
-  _signInActive = true;
-}
-
-Future navigateToProfile(context) async {
-  await Navigator.push(
-      context, MaterialPageRoute(builder: (context) => Profile()));
-}

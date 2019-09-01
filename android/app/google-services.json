@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "318159412197",
+    "firebase_url": "https://momentum-4c39e.firebaseio.com",
+    "project_id": "momentum-4c39e",
+    "storage_bucket": "momentum-4c39e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318159412197:android:c712a09994420035",
+        "android_client_info": {
+          "package_name": "kimlangholz.momentum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "318159412197-jvpoblsn998clq1tv17j97711puc0bn6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDt3HDJMXtj24bYvBql0M9N-J4-lC8m1cY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "318159412197-jvpoblsn998clq1tv17j97711puc0bn6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "318159412197-7n5b5r6h4d3ljvqrpq9t0i4d7a5q42ft.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "kimlangholz.logInScreen"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
