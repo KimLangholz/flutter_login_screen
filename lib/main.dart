@@ -9,12 +9,12 @@ import 'package:http/http.dart' as http;
 import 'package:momentum/Objects/user.dart';
 import 'package:momentum/Screens/Profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 bool _signUpActive = false;
 bool _signInActive = true;
 TextEditingController _emailController = TextEditingController();
 TextEditingController _passwordController = TextEditingController();
-TextEditingController _newUsernameController = TextEditingController();
 TextEditingController _newEmailController = TextEditingController();
 TextEditingController _newPasswordController = TextEditingController();
 
@@ -45,9 +45,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1304, allowFontScaling: true)
@@ -189,10 +189,11 @@ class _MyAppState extends State<MyApp> {
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white, width: 1.0)),
                 prefixIcon: const Icon(
-                  Icons.person,
+                  Icons.email,
                   color: Colors.white,
                 ),
               ),
+              obscureText: false,
             ),
           ),
         ),
@@ -240,7 +241,7 @@ class _MyAppState extends State<MyApp> {
                   borderRadius: BorderRadius.circular(20.0)),
               color: Colors.white,
               onPressed: () =>
-                  tryToSignIn(_emailController, _passwordController),
+                  tryToSignIn(context, _emailController, _passwordController),
             ),
           ),
         ),
@@ -285,7 +286,9 @@ class _MyAppState extends State<MyApp> {
                 Color(0xFF1DA1F2),
               ],
               iconData: CustomIcons.twitter,
-              onPressed: () {},
+              onPressed: () {
+                _handleSignIn();
+              },
             ),
             SizedBox(
               width: 30,
@@ -315,31 +318,7 @@ class _MyAppState extends State<MyApp> {
           child: Padding(
             padding: EdgeInsets.only(),
             child: TextField(
-              style: TextStyle(color: Colors.white),
-              controller: _newUsernameController,
-              decoration: InputDecoration(
-                hintText: 'Enter your Name',
-                hintStyle: TextStyle(fontSize: 18.0, color: Colors.white),
-                enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white, width: 1.0)),
-                focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white, width: 1.0)),
-                prefixIcon: const Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          height: ScreenUtil.getInstance().setHeight(50),
-        ),
-        Container(
-          child: Padding(
-            padding: EdgeInsets.only(),
-            child: TextField(
-              obscureText: true,
+              obscureText: false,
               style: TextStyle(color: Colors.white),
               controller: _newEmailController,
               decoration: InputDecoration(
@@ -401,8 +380,8 @@ class _MyAppState extends State<MyApp> {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20.0)),
               color: Colors.white,
-              onPressed: () => tryToSignUp(_newUsernameController,
-                  _newPasswordController, _newEmailController),
+              onPressed: () =>
+                  tryToSignUp(_newPasswordController, _newEmailController),
             ),
           ),
         ),
@@ -451,26 +430,56 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  void validateWithFirebase(String email, String password) async {
+
+
+  void validateWithFirebase(context, String email, String password) async {
+    try {
+      AuthResult auth = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      print('Signed in: ${auth.user.uid}');
+      navigateToProfile(context);
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  Future<FirebaseUser> _handleSignIn() async {
+
+    try {
+      GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+      GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      AuthCredential credential = GoogleAuthProvider.getCredential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      AuthResult result = await FirebaseAuth.instance.signInWithCredential(credential);
+      print("signed in " + result.user.displayName);
+      return result.user;
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  void signUpWithEmailAndPassword(String email, String password) async {
     try {
       AuthResult result = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-      print('Signed in: ${result.user.uid}');
+          .createUserWithEmailAndPassword(email: email, password: password);
+      print('Signed up: ${result.user.uid}');
     } catch (e) {
       print('Error: $e');
     }
   }
 
   void tryToSignIn(
-      TextEditingController _email, TextEditingController _password) {
-    validateWithFirebase(_email.text, _password.text);
+      context, TextEditingController _email, TextEditingController _password) {
+    validateWithFirebase(
+        context, _email.text.trim().toLowerCase(), _password.text);
   }
 
-  void tryToSignUp(TextEditingController _name, TextEditingController _password,
-      TextEditingController _email) {
-    var enteredName = _name;
-    var enteredmail = _email;
-    var enteredPassword = _password;
+  void tryToSignUp(
+      TextEditingController _password, TextEditingController _email) {
+    signUpWithEmailAndPassword(
+        _email.text.trim().toLowerCase(), _password.text);
   }
 
   void changeToSignUp() {
@@ -488,5 +497,3 @@ class _MyAppState extends State<MyApp> {
         context, MaterialPageRoute(builder: (context) => Profile()));
   }
 }
-
-
