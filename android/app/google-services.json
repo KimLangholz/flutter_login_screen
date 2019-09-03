@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "318159412197-n7gdp80ehsa31jio7o7lbvv03hsberoq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kimlangholz.momentum",
+            "certificate_hash": "67b4851d8d80f7806aab0a46b44f73ea6d867fa1"
+          }
+        },
+        {
           "client_id": "318159412197-jvpoblsn998clq1tv17j97711puc0bn6.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -77,6 +77,20 @@
             </dict>
         </array>
         <!-- End of the Google Sign-in Section -->
+        <key>CFBundleURLTypes</key>
+        <array>
+          <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+              <string>twitterkit-<consumerKey></string>
+            </array>
+          </dict>
+        </array>
+        <key>LSApplicationQueriesSchemes</key>
+        <array>
+            <string>twitter</string>
+            <string>twitterauth</string>
+        </array>
         
     
     </dict>

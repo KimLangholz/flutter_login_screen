@@ -10,6 +10,7 @@ import 'package:momentum/Objects/user.dart';
 import 'package:momentum/Screens/Profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:momentum/FirebaseAuthAPI.dart';
 
 bool _signUpActive = false;
 bool _signInActive = true;
@@ -41,6 +42,24 @@ class _MyAppState extends State<MyApp> {
   bool isLoggedIn = false;
   var profileData;
   var facebookLogin = FacebookLogin();
+
+  Future<bool> _loginGoogleUser() async {
+    final api = await FirebaseAuthAPI.signInWithGoogle();
+    if (api != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> _loginTwitterUser() async {
+    final api = await FirebaseAuthAPI.signInWithTwitter();
+    if (api != null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -281,26 +300,38 @@ class _MyAppState extends State<MyApp> {
               width: 30,
             ),
             SocialIcon(
-              colors: [
-                Color(0xFF1DA1F2),
-                Color(0xFF1DA1F2),
-              ],
-              iconData: CustomIcons.twitter,
-              onPressed: () {
-                _handleSignIn();
-              },
-            ),
+                colors: [
+                  Color(0xFF1DA1F2),
+                  Color(0xFF1DA1F2),
+                ],
+                iconData: CustomIcons.twitter,
+                onPressed: () async {
+                  bool b = await _loginTwitterUser();
+                  if (b == true) {
+                    signInWithTwitter(context);
+                  } else {
+                    Scaffold.of(context).showSnackBar(
+                        SnackBar(content: Text("Wrong email or")));
+                  }
+                }),
             SizedBox(
               width: 30,
             ),
             SocialIcon(
-              colors: [
-                Color(0xFF0077B5),
-                Color(0xFF0077B5),
-              ],
-              iconData: CustomIcons.linkedin,
-              onPressed: () {},
-            )
+                colors: [
+                  Color(0xFFDB4437),
+                  Color(0xFFDB4437),
+                ],
+                iconData: CustomIcons.Google,
+                onPressed: () async {
+                  bool b = await _loginGoogleUser();
+                  if (b == true) {
+                    signInWithGoogle(context);
+                  } else {
+                    Scaffold.of(context).showSnackBar(
+                        SnackBar(content: Text("Wrong email or")));
+                  }
+                })
           ],
         )
       ],
@@ -430,34 +461,23 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-
-
   void validateWithFirebase(context, String email, String password) async {
     try {
-      AuthResult auth = await FirebaseAuth.instance
+      AuthResult result = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      print('Signed in: ${auth.user.uid}');
+      print('Signed in: ${result.user.uid}');
       navigateToProfile(context);
     } catch (e) {
       print('Error: $e');
     }
   }
 
-  Future<FirebaseUser> _handleSignIn() async {
+  void signInWithGoogle(context) {
+    navigateToProfile(context);
+  }
 
-    try {
-      GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-      GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-      AuthCredential credential = GoogleAuthProvider.getCredential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      AuthResult result = await FirebaseAuth.instance.signInWithCredential(credential);
-      print("signed in " + result.user.displayName);
-      return result.user;
-    } catch (e) {
-      print('Error: $e');
-    }
+  void signInWithTwitter(context) {
+    navigateToProfile(context);
   }
 
   void signUpWithEmailAndPassword(String email, String password) async {
