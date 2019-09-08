@@ -1,17 +1,12 @@
 # log_in_screen
 
-A new Flutter application.
+A simple flutter/dart based login-screen that connects with Firebase Auth to enable users to sign-in/up with Email or through Facebook. 
 
-## Getting Started
+It's created as a template that I can use in upcoming projects instead of having to reinvent the wheel over and over again.  
 
-This project is a starting point for a Flutter application.
+## Getting Started With This Template
 
-A few resources to get you started if this is your first Flutter project:
+As it's based on Firebase and uses Facebook to login, you'll need the following:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# LoginScreen
+1) A Firebase profile that you can connect through. - Go to Firebase.com and register.
+2) To register your app on Facebook - Here's a quick setup guide: https://medium.com/flutterpub/firebase-fb-sign-in-and-flutter-7ab4bdc7172e
