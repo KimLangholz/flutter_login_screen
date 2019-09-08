@@ -1,4 +1,4 @@
-# log_in_screen
+# A flutter / Firebase login screen
 
 A simple flutter/dart based login-screen that connects with Firebase Auth to enable users to sign-in/up with Email or through Facebook. 
 
