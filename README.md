@@ -4,6 +4,9 @@ A simple flutter/dart based login-screen that connects with Firebase Auth to ena
 
 It's created as a template that I or you can use in upcoming projects instead of having to reinvent the wheel over and over again.  
 
+![SignIn page](/assets/screenshots/screenshot_iPhone6s_signin.png?raw=true "Optional Title")
+![SignUp page](/assets/screenshots/screenshot_iPhone6s_signup.png?raw=true "Optional Title")
+
 ## Getting Started With This Template
 
 As it's based on Firebase and uses Facebook to login, you'll need to do the following to make it work:
