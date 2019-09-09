@@ -1,4 +1,4 @@
-# A flutter / Firebase login screen
+# A Flutter / Firebase login screen
 
 A simple flutter/dart based login-screen that connects with Firebase Auth to enable users to sign-in/up with Email or through Facebook. 
 
@@ -62,3 +62,4 @@ As I've decided to follow the MVC pattern, you can easily change the text by nav
 ## Roadmap:
 
 * Improve UX by testing it on additional phones. Making sure there're no overflow errors. 
+* Add error messages to login form
