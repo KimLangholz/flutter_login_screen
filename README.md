@@ -4,7 +4,7 @@ A simple flutter/dart based login-screen that connects with Firebase Auth to ena
 
 It's created as a template that I or you can use in upcoming projects instead of having to reinvent the wheel over and over again.  
 
-![Flutter login screen](/assets/screenshots/screenshots.png?raw=true)
+![Flutter login screen](/assets/screenshots/screenshot.png?raw=true)
 
 ## Getting Started With This Template
 
