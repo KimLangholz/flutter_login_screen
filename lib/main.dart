@@ -387,7 +387,7 @@ class _LogInPageState extends StateMVC<LogInPage> {
               ),
               color: Colors.blueGrey,
               onPressed: () =>
-                  Controller.tryToSignUpWithEmail(
+                  Controller.signUpWithEmailAndPassword(
                       _newEmailController, _newPasswordController),
             ),
           ),
