@@ -26,7 +26,7 @@ class User{
 
   String get password => _password;
 
-  String get saltKye => _saltKey;
+  String get saltKey => _saltKey;
 
   String get fbID => _fbID;
 
